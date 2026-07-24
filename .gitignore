@@ -1,0 +1,62 @@
+# ─── Secrets ──────────────────────────────────────────
+.env
+*.env
+secrets.toml
+.streamlit/secrets.toml
+
+# ─── Python ───────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.whl
+
+# ─── Virtual Environments ─────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+.env/
+
+# ─── Jupyter ──────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ─── IDEs ─────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ─── OS Files ─────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Large Data Files ─────────────────────────────────
+data/ipl_json/*.json
+ipl/ipl_male_json/*.json
+*.json
+!chrome_extension/manifest.json
+data/*.csv
+data/scraped_cache.json
+!xgb_model.pkl
+!data/ipl_json/xgb_model.pkl
+*.joblib
+*.h5
+*.hdf5
+
+# ─── Logs ─────────────────────────────────────────────
+*.log
+logs/
+
+# ─── Streamlit Cache ──────────────────────────────────
+.streamlit/

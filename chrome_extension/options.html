@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IPL Live Predictor — Settings</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .header .logo { font-size: 48px; margin-bottom: 8px; }
+    .header h1 { font-size: 22px; font-weight: 700; color: #ffd200; }
+    .header p  { font-size: 13px; color: #aaa; margin-top: 4px; }
+
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,215,0,0.15);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .card h2 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffd200;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      color: #aaa;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 13px;
+      font-family: 'Inter', monospace;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus, input[type="password"]:focus {
+      border-color: #ffd200;
+    }
+
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .toggle-row:last-child { border-bottom: none; }
+    .toggle-label { font-size: 13px; }
+    .toggle-desc  { font-size: 11px; color: #888; margin-top: 2px; }
+
+    /* Toggle Switch */
+    .switch { position: relative; width: 44px; height: 24px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255,255,255,0.15);
+      border-radius: 24px;
+      transition: 0.3s;
+    }
+    .slider:before {
+      position: absolute; content: "";
+      height: 18px; width: 18px;
+      left: 3px; bottom: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    input:checked + .slider { background: #ffd200; }
+    input:checked + .slider:before { transform: translateX(20px); background: #0f0c29; }
+
+    .btn-save {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(90deg, #f7971e, #ffd200);
+      color: #0f0c29;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-save:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .status-msg {
+      text-align: center;
+      font-size: 12px;
+      margin-top: 12px;
+      padding: 8px;
+      border-radius: 8px;
+      display: none;
+    }
+    .status-msg.success {
+      background: rgba(0,200,100,0.15);
+      color: #00e676;
+      border: 1px solid rgba(0,200,100,0.3);
+    }
+    .status-msg.error {
+      background: rgba(255,65,54,0.15);
+      color: #ff8080;
+      border: 1px solid rgba(255,65,54,0.3);
+    }
+
+    .info-box {
+      background: rgba(255,215,0,0.08);
+      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 12px;
+      color: #ccc;
+      line-height: 1.6;
+    }
+    .info-box a { color: #ffd200; text-decoration: none; }
+    .info-box a:hover { text-decoration: underline; }
+
+    .param-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .param-table th {
+      text-align: left;
+      color: #ffd200;
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .param-table td {
+      padding: 6px 8px;
+      color: #ccc;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .param-table td:first-child { color: #fff; font-weight: 600; }
+    code {
+      background: rgba(255,255,255,0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #ffd200;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">🏏</div>
+    <h1>IPL Live Predictor — Settings</h1>
+    <p>Configure your API key, notifications, and preferences</p>
+  </div>
+
+  <!-- API Key Card -->
+  <div class="card">
+    <h2>🔑 CricAPI Configuration</h2>
+    <label for="api-key-input">CricAPI Key</label>
+    <input type="password" id="api-key-input" placeholder="Paste your CricAPI key here…"/>
+
+    <div class="info-box" style="margin-top: 14px;">
+      Get your free key at <a href="https://cricapi.com" target="_blank">cricapi.com</a>.
+      Free tier: <strong>100 calls/day</strong>. The extension polls every 60 seconds
+      (~1440 calls/day) — upgrade to a paid plan for continuous live updates.
+      <br/><br/>
+      <strong>Endpoints used:</strong><br/>
+      • <code>/currentMatches</code> — live match scores<br/>
+      • <code>/series</code> — IPL series list<br/>
+      • <code>/match_info</code> — detailed match data
+    </div>
+  </div>
+
+  <!-- Notification Settings -->
+  <div class="card">
+    <h2>🔔 Notifications</h2>
+
+    <div class="toggle-row">
+      <div>
+        <div class="toggle-label">Live Score Alerts</div>
+        <div class="toggle-desc">Notify when match status or score changes</div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="toggle-notifications" checked/>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="toggle-row">
+      <div>
+        <div class="toggle-label">Auto-Refresh</div>
+        <div class="toggle-desc">Background polling every 60 seconds</div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="toggle-autorefresh" checked/>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="toggle-row">
+      <div>
+        <div class="toggle-label">IPL Matches Only</div>
+        <div class="toggle-desc">Filter out non-IPL matches from popup</div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="toggle-iplonly" checked/>
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- API Parameters Reference -->
+  <div class="card">
+    <h2>📡 API & Scraper Parameters</h2>
+    <table class="param-table">
+      <tr>
+        <th>Parameter</th><th>Type</th><th>Description</th>
+      </tr>
+      <tr><td>apikey</td><td>string</td><td>Your CricAPI key (required)</td></tr>
+      <tr><td>offset</td><td>int</td><td>Pagination start (default: 0)</td></tr>
+      <tr><td>id</td><td>string</td><td>Match ID for match_info endpoint</td></tr>
+      <tr><td>search</td><td>string</td><td>Player name for /players endpoint</td></tr>
+      <tr><td>year</td><td>int</td><td>IPL season year for scraper (2023–2025)</td></tr>
+    </table>
+  </div>
+
+  <!-- Save Button -->
+  <button class="btn-save" id="btn-save" onclick="saveSettings()">
+    💾 Save Settings
+  </button>
+  <div class="status-msg" id="status-msg"></div>
+
+</div>
+<script src="options.js"></script>
+</body>
+</html>
